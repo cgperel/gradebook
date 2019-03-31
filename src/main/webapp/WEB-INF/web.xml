@@ -6,7 +6,7 @@
   <display-name>Archetype Created Web Application</display-name>
   <servlet>
     <servlet-name>login</servlet-name>
-    <servlet-class>servlet.login</servlet-class>
+    <servlet-class>servlet.Login</servlet-class>
   </servlet>
 
   <servlet-mapping>

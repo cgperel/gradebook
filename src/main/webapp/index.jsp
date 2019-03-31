@@ -1,11 +1,9 @@
 <html>
-<body>
-<h2>Hello World!</h2>
-<form action = "main.jsp" method = "GET">
-First Name: <input type = "text" name = "first_name">
-<br />
-Last Name: <input type = "text" name = "last_name" />
-<input type = "submit" value = "Submit" />
+<body{background-color: green;}>
+<h2>Welcome to your grade book!</h2>
+<form action = "/login" method = "GET">
+Press Start to Login.
+<input type = "submit" value = "Start" />
 </form>
 </body>
 </html>
