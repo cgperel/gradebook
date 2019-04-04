@@ -8,7 +8,7 @@ public class DBConnector {
     public DBConnector() {
         try {
             this.conn =
-                    DriverManager.getConnection("jdbc:mysql://localhost:3306/test?" +
+                    DriverManager.getConnection("jdbc:mysql://localhost:3306/projecttrack?" +
                             "user=root&password="+System.getenv ("PASSWORD")+"&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
 
         } catch (SQLException ex) {
