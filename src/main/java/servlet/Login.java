@@ -14,8 +14,9 @@ public class Login extends HttpServlet {
     }
 
   //  @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp, String username) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp, String username, String password) throws ServletException, IOException {
         req.getAttribute (username);
+        req.getAttribute (password);
         //req.getAttribute ()//give name of field that they'll fill in
         System.out.println ("Post was called");
     }
