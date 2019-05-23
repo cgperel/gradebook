@@ -10,7 +10,7 @@ You are logged in as ${param.username}
 <br/><br/>
 
 <a href="index.jsp">Return to homepage.</a>
-<form action = "/authenticate" method = "POST">
+<form action = "/authenticate" method = "GET">
 Are you a teacher?
 <input type = "checkbox" name="areYouATeacher" value="Yes"/> Yes
 <input type = "checkbox" name="areYouATeacher" value="No"/> No
