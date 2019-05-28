@@ -21,13 +21,24 @@ public class Calculator extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         String username;
+        String returningUsername;
+        returningUsername = req.getParameter ("returningUsername");
         username = /**(String)**/req.getParameter ("username");
         session.setAttribute("username", username);
         String numberOfTestGrades = (String) req.getParameter ("numberOfTestGrades");
-        System.out.println (numberOfTestGrades);
+        //System.out.println (numberOfTestGrades);
         req.setAttribute ("numberOfTestGrades", numberOfTestGrades);
         req.getRequestDispatcher ("/calculator.jsp").forward (req,resp);
        // req.setAttribute ("numberOfTestGrades", numberOfTestGrades);
+        req.setAttribute ("returningUsername", returningUsername);
+        if ("username" ==null|| "numberOfTestGrades" == null) {
+            //if ("returningUsername" == null) {
+                req.getRequestDispatcher ("/noUser");
+            } else {
+                    req.getRequestDispatcher ("/nouser.jsp").forward (req,resp);
+           // }
+        }
+
 
 
     }
@@ -50,10 +61,11 @@ public class Calculator extends HttpServlet {
         //Double testGrade5 = Double.valueOf (req.getParameter ("testGrade5"));
         //Double testGrade6 = Double.valueOf (req.getParameter ("testGrade6"));
         //Double testGradeTotals = testGrade1+testGrade2+testGrade3+testGrade4+testGrade5+testGrade6;**/
-        Double gradeAverage = testGradeTotals/6;
+        Double gradeAverage = testGradeTotals/grades.length;
 
         DecimalFormat df2 = new DecimalFormat ("##.##");
         req.setAttribute ("gradeAverage",df2.format (gradeAverage));
+        
         //req.getSession().getAttribute ("username");
         req.getRequestDispatcher ("/calculatorResults.jsp").forward (req,resp);
 
