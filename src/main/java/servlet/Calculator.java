@@ -27,20 +27,20 @@ public class Calculator extends HttpServlet {
         session.setAttribute("username", username);
         String numberOfTestGrades = (String) req.getParameter ("numberOfTestGrades");
         //System.out.println (numberOfTestGrades);
-        req.setAttribute ("numberOfTestGrades", numberOfTestGrades);
-        req.getRequestDispatcher ("/calculator.jsp").forward (req,resp);
-       // req.setAttribute ("numberOfTestGrades", numberOfTestGrades);
-        req.setAttribute ("returningUsername", returningUsername);
-        if ("username" ==null|| "numberOfTestGrades" == null) {
-            //if ("returningUsername" == null) {
-                req.getRequestDispatcher ("/noUser");
-            } else {
-                    req.getRequestDispatcher ("/nouser.jsp").forward (req,resp);
-           // }
+        if(numberOfTestGrades != null) {
+            req.setAttribute ("numberOfTestGrades", numberOfTestGrades);
+            req.getRequestDispatcher ("/calculator.jsp").forward (req, resp);
+        } else if(username == null || numberOfTestGrades == null && returningUsername != null){
+
+            req.setAttribute ("returningUsername", returningUsername);
+            req.getRequestDispatcher ("/returningUserOptions.jsp").forward (req,resp);
+        }else if(returningUsername ==  ){
+
+
+        } else{
+            req.getRequestDispatcher ("/nouser.jsp").forward (req,resp);
+            // req.setAttribute ("numberOfTestGrades", numberOfTestGrades);
         }
-
-
-
     }
 
     protected void doPost (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{

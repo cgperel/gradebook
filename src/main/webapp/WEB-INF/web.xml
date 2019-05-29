@@ -20,6 +20,10 @@
     <servlet-name>Results</servlet-name>
     <servlet-class>servlet.Results</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>ReturningUserOptions</servlet-name>
+    <servlet-class>servlet.ReturningUserOptions</servlet-class>
+  </servlet>
 
   <servlet-mapping>
     <servlet-name>Login</servlet-name>
@@ -36,6 +40,10 @@
   <servlet-mapping>
     <servlet-name>Results</servlet-name>
     <url-pattern>/calculatorResults</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ReturningUserOptions</servlet-name>
+    <url-pattern>/returningUserOptions</url-pattern>
   </servlet-mapping>
 
 </web-app>
