@@ -13,9 +13,9 @@ public class Login extends HttpServlet {
         System.out.println ("get was called");
     }
 
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp, String username, String password, Integer numberOfTestGrades) throws ServletException, IOException {
-        req.getAttribute (username);
-        req.getAttribute (password);
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //req.getAttribute (username);
+        //req.getAttribute (password);
 
         System.out.println ("Post was called");
     }

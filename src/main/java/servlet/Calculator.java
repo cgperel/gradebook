@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -22,26 +23,52 @@ public class Calculator extends HttpServlet {
         HttpSession session = req.getSession();
         String username;
         String returningUsername;
+        String checkReturningUser = null;
         returningUsername = req.getParameter ("returningUsername");
-        username = /**(String)**/req.getParameter ("username");
+        username = req.getParameter ("username");
         session.setAttribute("username", username);
         String numberOfTestGrades = (String) req.getParameter ("numberOfTestGrades");
         //System.out.println (numberOfTestGrades);
         if(numberOfTestGrades != null) {
             req.setAttribute ("numberOfTestGrades", numberOfTestGrades);
             req.getRequestDispatcher ("/calculator.jsp").forward (req, resp);
-        } else if(username == null || numberOfTestGrades == null && returningUsername != null){
-
-            req.setAttribute ("returningUsername", returningUsername);
-            req.getRequestDispatcher ("/returningUserOptions.jsp").forward (req,resp);
-        }else if(returningUsername ==  ){
-
-
-        } else{
-            req.getRequestDispatcher ("/nouser.jsp").forward (req,resp);
-            // req.setAttribute ("numberOfTestGrades", numberOfTestGrades);
+        } else if(returningUsername != null){
+            PreparedStatement statement=null;
+            Connection conn = null;
+            String selectTableSQL = "SELECT username from projecttrack.student where username like '" + returningUsername+"'";
+            try{
+                conn = new DBConnector ().getConn();
+                statement=conn.prepareStatement (selectTableSQL);
+                ResultSet rs = statement.executeQuery (selectTableSQL);
+                if (rs.next ()){
+                   returningUsername=rs.getString ("username");
+                    req.setAttribute ("returningUsername", returningUsername);
+                    req.getRequestDispatcher ("/returningUserOptions.jsp").forward (req,resp);
+                    //checkReturningUser = rs.getString ("username");
+                }else{
+                    req.getRequestDispatcher ("/nouser.jsp").forward (req,resp);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace ( );
+            }finally {
+                if (conn != null){
+                    try{conn.close ();
+                    }catch (SQLException e){
+                        e.printStackTrace ();
+                    }
+                }if(statement != null){
+                    try {
+                        statement.close ();
+                    } catch (SQLException e){
+                        e.printStackTrace ();
+                    }
+                }
+            }
+       // }else if(returningUsername ==  ){
         }
+            // req.setAttribute ("numberOfTestGrades", numberOfTestGrades);
     }
+
 
     protected void doPost (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
         String[]grades =req.getParameterValues ("testGrade");//only want to get list of grades once
@@ -65,20 +92,35 @@ public class Calculator extends HttpServlet {
 
         DecimalFormat df2 = new DecimalFormat ("##.##");
         req.setAttribute ("gradeAverage",df2.format (gradeAverage));
-        
+        String letterGrade = null;
+        if(gradeAverage<65){
+            letterGrade="Fail";
+        }else if(gradeAverage>65 && gradeAverage<70){
+            letterGrade="D";
+        }else if(gradeAverage>69&&gradeAverage<80){
+            letterGrade="C";
+        }else if(gradeAverage>79&&gradeAverage<90){
+            letterGrade="B";
+        }else if(gradeAverage>89){
+            letterGrade="A";
+        }
+        req.setAttribute ("lettergrade", letterGrade);
+
         //req.getSession().getAttribute ("username");
-        req.getRequestDispatcher ("/calculatorResults.jsp").forward (req,resp);
+
 
         PrintWriter writer = resp.getWriter ();
         PreparedStatement statement = null;
         Connection conn =null;
-        String sql = "INSERT INTO student (username, average) values (?,?)";
+        String sql = "INSERT INTO projecttrack.student (username, average, lettergrade) values (?,?,?)";
         String username = (String) req.getSession ().getAttribute ("username");
+        //String average = (String)req.getSession ().getAttribute ("average");
         try {
             conn = new DBConnector ().getConn();
             statement=conn.prepareStatement (sql);
             statement.setString(1, username);
             statement.setDouble (2,gradeAverage);
+            statement.setString (3,letterGrade);
             statement.executeUpdate ();
 
         } catch (SQLException e){
@@ -98,5 +140,6 @@ public class Calculator extends HttpServlet {
                 }
             }
         }
+        req.getRequestDispatcher ("/calculatorResults.jsp").forward (req,resp);
     }
 }

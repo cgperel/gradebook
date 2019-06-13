@@ -18,7 +18,7 @@ Enter test grades to calculate your current average and letter grade.
 
 <%for (int i=0; i<numberOfTestGrades;i++){ %>
 Test Grade: <input type="number" name="testGrade" />
-    <br/><br/>
+<br/><br/>
 
 <%}%>
 

@@ -14,15 +14,16 @@ body{
 </style>
 </head>
 <body>
+<img src="Aplus.jpg" alt="A+">
 <body style="background-color:LightGray;">
-<h2 style="color:blue;"> Welcome to your grade book!</h2>
+<h2 style="color:purple;"> Welcome to your grade book!</h2>
 <form action = "/calculator" method = "GET">
 Hello world!<br/>
 <br/>
 Username/Email: <input type="text" name="username" />
 <br/><br/>
 How many test grades would you like to calculate? <input type="number" name="numberOfTestGrades"/>
-<br/><br/>
+
 <!--Password: <input type="text" name="password" />
 <br/><br/>-->
 Press register to Login.
@@ -32,12 +33,13 @@ Press register to Login.
 </form>
 <br/><br/>
 
-<form action = "/calculator" method = "GET" />
+<form action = "/calculator" method = "GET" >
 Are you a returning user? Enter username to check your grade. <input type="text" name="returningUsername" />
 <br/><br/>
 Press check my grade.
 <br/><br/>
 <input type = "submit" value ="Check my grade"/>
+</form>
 <div class="absolute">
 Current date and time: <%=(new java.util.Date()).toLocaleString()%>
 <br/><br/>
