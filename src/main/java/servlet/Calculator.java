@@ -35,14 +35,16 @@ public class Calculator extends HttpServlet {
         } else if(returningUsername != null){
             PreparedStatement statement=null;
             Connection conn = null;
-            String selectTableSQL = "SELECT username from projecttrack.student where username like '" + returningUsername+"'";
+            String selectTableSQL = "SELECT username, average from projecttrack.student where username like '" + returningUsername+"'";
             try{
                 conn = new DBConnector ().getConn();
                 statement=conn.prepareStatement (selectTableSQL);
                 ResultSet rs = statement.executeQuery (selectTableSQL);
                 if (rs.next ()){
                    returningUsername=rs.getString ("username");
+                   String average=rs.getString ("average");
                     req.setAttribute ("returningUsername", returningUsername);
+                    req.setAttribute ("average",average);
                     req.getRequestDispatcher ("/returningUserOptions.jsp").forward (req,resp);
                     //checkReturningUser = rs.getString ("username");
                 }else{

@@ -23,9 +23,9 @@ Hello world!<br/>
 Username/Email: <input type="text" name="username" />
 <br/><br/>
 How many test grades would you like to calculate? <input type="number" name="numberOfTestGrades"/>
-
-<!--Password: <input type="text" name="password" />
-<br/><br/>-->
+<br/><br/>
+Password: <input type="text" name="password" />
+<br/><br/>
 Press register to Login.
 <br/><br/>
 <input type = "submit" value = "Register" />
