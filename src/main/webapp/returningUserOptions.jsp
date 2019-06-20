@@ -3,10 +3,12 @@
 <head>
 Welcome back!&nbsp; <%=request.getAttribute("returningUsername")%>
 
-<body>
 
 
 Your current grade is <%=request.getAttribute("average")%>
+<form action ="/returningUserResults" method ="GET">
+
+<body>
 </br></br>
 
 make a get form with options and check grade that goes to returning options servlet

@@ -73,6 +73,7 @@ public class Calculator extends HttpServlet {
 
 
     protected void doPost (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+        String classname = req.getParameter ("classname");
         String[]grades =req.getParameterValues ("testGrade");//only want to get list of grades once
         //for (int i=0; i<arr)
         Double testGradeTotals=0.0;
@@ -114,7 +115,7 @@ public class Calculator extends HttpServlet {
         PrintWriter writer = resp.getWriter ();
         PreparedStatement statement = null;
         Connection conn =null;
-        String sql = "INSERT INTO projecttrack.student (username, average, lettergrade) values (?,?,?)";
+        String sql = "INSERT INTO projecttrack.student (username, average, lettergrade, classname) values (?,?,?,?)";
         String username = (String) req.getSession ().getAttribute ("username");
         //String average = (String)req.getSession ().getAttribute ("average");
         try {
@@ -123,6 +124,7 @@ public class Calculator extends HttpServlet {
             statement.setString(1, username);
             statement.setDouble (2,gradeAverage);
             statement.setString (3,letterGrade);
+            statement.setString (4,classname);
             statement.executeUpdate ();
 
         } catch (SQLException e){
