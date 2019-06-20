@@ -14,7 +14,7 @@ body{
 </style>
 </head>
 <body>
-<img src="Aplus.jpg" alt="A+">
+<img src="https://live.staticflickr.com/6014/5963475453_bee44b6ed4_b.jpg" alt="A+" style="width: 200px;height:200px">
 <body style="background-color:LightGray;">
 <h2 style="color:purple;"> Welcome to your grade book!</h2>
 <form action = "/calculator" method = "GET">
