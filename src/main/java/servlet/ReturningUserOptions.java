@@ -1,6 +1,7 @@
 package servlet;
 
 import database.DBConnector;
+import database.Student;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +12,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ReturningUserOptions extends HttpServlet {
     @Override
@@ -33,6 +36,7 @@ public class ReturningUserOptions extends HttpServlet {
                 System.out.println ("id:"+id);
                 System.out.println ("user:"+ username);
                 System.out.println ("Average:"+average);
+
 
             }
         } catch (SQLException e) {
@@ -58,9 +62,32 @@ public class ReturningUserOptions extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher ("/returningUserResults.jsp").forward (req,resp);
+        //String sql="UPDATE projecttrack.Student SET average= WHERE id= ";
+        String classname = req.getParameter ("classname");
+        PreparedStatement statement=null;
+        Connection conn = null;
+        String sql="SELECT username, average, lettergrade, classname from projecttrack.student where classname like '"+ classname+"'";
+        try{
+            conn = new DBConnector ().getConn ();
+            statement=conn.prepareStatement (sql);
+            ResultSet rs=statement.executeQuery (sql);
+            List students = new ArrayList<Student>();
+            while (rs.next ( )) {
+                Student student=new Student ();
+                student.setUsername (rs.getString ("username"));
+                student.setAverage (rs.getDouble ("average"));
+                student.setLettergrade (rs.getString ("lettergrade"));
+                student.setClassname (rs.getString ("classname"));
+                students.add (student);
 
-        super.doPost (req, resp);
 
+
+            }
+            req.setAttribute ("students",students);
+        } catch (SQLException e) {
+            e.printStackTrace ( );
+        }
     }
 }
 

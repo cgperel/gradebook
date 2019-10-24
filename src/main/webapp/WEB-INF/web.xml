@@ -24,6 +24,10 @@
     <servlet-name>ReturningUserOptions</servlet-name>
     <servlet-class>servlet.ReturningUserOptions</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>ReturningUserResults</servlet-name>
+    <servlet-class>servlet.ReturningUserResults</servlet-class>
+  </servlet>
 
   <servlet-mapping>
     <servlet-name>Login</servlet-name>
@@ -44,6 +48,10 @@
   <servlet-mapping>
     <servlet-name>ReturningUserOptions</servlet-name>
     <url-pattern>/returningUserOptions</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ReturningUserResults</servlet-name>
+    <url-pattern>/returningUserResults</url-pattern>
   </servlet-mapping>
 
 </web-app>

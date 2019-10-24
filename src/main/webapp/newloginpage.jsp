@@ -18,11 +18,8 @@ body{
 <body style="background-color:LightGray;">
 <h2 style="color:purple;"> Welcome to your grade book!</h2>
 <form action = "/calculator" method = "GET">
-Hello world!<br/>
 <br/>
 Username/Email: <input type="text" name="username" />
-<br/><br/>
-How many test grades would you like to calculate? <input type="number" name="numberOfTestGrades"/>
 <br/><br/>
 Password: <input type="password" name="password" />
 <br/><br/>
@@ -32,13 +29,8 @@ Press register to Login.
 
 </form>
 <br/><br/>
-
-<form action = "/calculator" method = "GET" >
-Are you a returning user? Enter username to check your grade. <input type="text" name="returningUsername" />
-<br/><br/>
-Press check my grade.
-<br/><br/>
-<input type = "submit" value ="Check my grade"/>
+<form action = "returningUserOptions" method="GET">
+Returning user? <input type="submit" value="Click here."/>
 </form>
 <div class="absolute">
 Current date and time: <%=(new java.util.Date()).toLocaleString()%>
